@@ -1,3 +1,4 @@
+/*
 package realtimeweb.stockservice;
 
 import java.io.FileInputStream;
@@ -23,9 +24,11 @@ import realtimeweb.stickyweb.exceptions.StickyWebLoadDataSourceException;
 import realtimeweb.stickyweb.exceptions.StickyWebNotInCacheException;
 import realtimeweb.stockservice.domain.Stock;
 
+*/
 /**
  * Get the latest information about stocks.
- */
+ *//*
+
 public class StockService {
     private StickyWeb connection;
 	private boolean online;
@@ -54,9 +57,11 @@ public class StockService {
         // ** End of how to use the EditableCache
     }
 	
-    /**
+    */
+/**
      * Create a new, online connection to the service
-     */
+     *//*
+
 	public StockService() {
         this.online = true;
 		try {
@@ -70,10 +75,12 @@ public class StockService {
 		}
 	}
 	
-    /**
+    */
+/**
      * Create a new, offline connection to the service.
      * @param cache The filename of the cache to be used.
-     */
+     *//*
+
 	public StockService(String cache) {
         // TODO: You might consider putting the cache directly into the jar file,
         // and not even exposing filenames!
@@ -96,7 +103,8 @@ public class StockService {
 	}
     
     
-    /**
+    */
+/**
      * Retrieves current stock information.
      *
      * This version of the function meant for instructors to capture a
@@ -105,13 +113,16 @@ public class StockService {
      * 
      * @param ticker A comma separated list of ticker symbols (e.g. "AAPL, MSFT, CSCO").
      * @return a StickyWebRequest
-     */
+     *//*
+
     public StickyWebRequest getStockInfoRequest(String ticker) {
         try {
-            /*
+            */
+/*
             * Perform any user parameter validation here. E.g.,
             * if the first argument can't be zero, or they give an empty string.
-            */
+            *//*
+
             
             // Build up query string
             final String url = String.format("http://www.google.com/finance/info");
@@ -137,12 +148,14 @@ public class StockService {
         return null;
     }
     
-    /**
+    */
+/**
      * Retrieves current stock information.
     
      * @param ticker A comma separated list of ticker symbols (e.g. "AAPL, MSFT, CSCO").
      * @return a Stock
-     */
+     *//*
+
 	public Stock getStockInfo(String ticker) {
         
         // Might need to consume first two characters, which appear to be double slashes
@@ -174,4 +187,4 @@ public class StockService {
 	
 
     
-}
+}*/
