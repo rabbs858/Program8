@@ -18,7 +18,7 @@ import java.util.Scanner;
  */
 public class StockComparison {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, NullPointerException {
         ArrayList<Stock> list = new ArrayList<>();
         Scanner input = new Scanner(System.in);
 
@@ -60,7 +60,7 @@ public class StockComparison {
      * @param a An ArrayList of Stock objects.
      */
     public static void printStocks(ArrayList<Stock> a) {
-        System.out.println("NAME:\tPRICE:\tCHANGE:\tPEG:\tDIVIDEND:");
+        System.out.println("NAME:\t\tPRICE:\t\tCHANGE:\t\tPEG:\t\tDIVIDEND:");
         for (int i = 0; i < a.size(); i++) {
             BigDecimal price = a.get(i).getQuote().getPrice();
             BigDecimal change = a.get(i).getQuote().getChangeInPercent();
@@ -70,7 +70,7 @@ public class StockComparison {
             while (name.length() < 4) {
                 name += " ";
             }
-            System.out.println(name + "\t" + price + "\t" + change + "\t" + peg + "\t" + dividend);
+            System.out.println(name + "\t\t" + price + "\t\t" + change + "\t\t" + peg + "\t\t" + dividend);
         }
     }
 
