@@ -15,6 +15,7 @@ public class Sandbox {
         ArrayList<Stock> list = new ArrayList<>();
         Scanner input = new Scanner(System.in);
 
+        System.out.println("Program 7, Robert Phillips, masc0741");
         System.out.println("Please enter up a list of stock symbols separated by spaces:");
 
         String userInput = input.nextLine();
