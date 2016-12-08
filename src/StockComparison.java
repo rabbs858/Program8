@@ -10,8 +10,7 @@ import java.util.Scanner;
  *
  * @author Rob Phillips / Adam Hancock
  * @description This class uses Stjin Strickx's Yahoo Finance API, obtained from financequotes-api.com. Allows the user
- * to enter as many stock symbols as they wish and compares all of them to find the largest change. Can sort by other
- * options like PEG (price/earnings to growth ratio) and dividend, as well.
+ * to enter as many stock symbols as they wish and compares all of them to find the largest change.
  * CS108-2
  * @date 12/7/2016
  * @email rphillips@sdsu.edu / adamcollegemail8@gmail.com
@@ -32,13 +31,13 @@ public class StockComparison {
         for (String stock : symbols) {
             try {
                 list.add(getStock(stock));
-                Thread.sleep(1000);
+                Thread.sleep(500);
             } catch (InterruptedException ex) {
                 Thread.currentThread().interrupt();
             }
         }
 
-        listSort(list, "Change");
+        listSort(list);
         printStocks(list);
     }
 
@@ -75,32 +74,19 @@ public class StockComparison {
     }
 
     /**
-     * An insertion sort. Not the most efficient, but done for academic purposes and learning how the insertion sort works.
+     * An insertion sort for sorting the ArrayList.
      *
      * @param a      An ArrayList of Stock objects.
-     * @param sortBy Category you wish to sort by. Default for this project is CHANGE.
      */
-    public static void listSort(ArrayList<Stock> a, String sortBy) {
-        if (sortBy.equals("peg")) {
-            for (int i = 0; i < a.size(); i++) {
-                for (int j = i; j > 0; j--) {
-                    if (a.get(j).getStats().getPeg().compareTo(a.get(i).getStats().getPeg()) < 0) {
-                        Stock temp = a.get(i);
-                        a.set(i, a.get(j));
-                        a.set(j, temp);
-                    }
-                }
+    public static void listSort(ArrayList<Stock> a) {
+
+        for (int i = 1; i < a.size(); i++) {
+            Stock key = a.get(i);
+            int j;
+            for (j = i - 1; j >= 0 && key.getQuote().getChangeInPercent().compareTo(a.get(j).getQuote().getChangeInPercent()) > 0; j--) {
+                a.set(j + 1, a.get(j));
             }
-        } else {
-            for (int i = 0; i < a.size(); i++) {
-                for (int j = i; j > 0; j--) {
-                    if (a.get(j).getQuote().getChangeInPercent().compareTo(a.get(i).getQuote().getChangeInPercent()) < 0) {
-                        Stock temp = a.get(i);
-                        a.set(i, a.get(j));
-                        a.set(j, temp);
-                    }
-                }
-            }
+            a.set(j + 1, key);
         }
     }
 }
