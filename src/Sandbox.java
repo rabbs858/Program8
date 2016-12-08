@@ -1,5 +1,4 @@
-package yahoofinance.YahooFinance;
-
+import yahoofinance.YahooFinance;
 import yahoofinance.Stock;
 
 import java.io.IOException;
