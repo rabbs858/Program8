@@ -1,7 +1,9 @@
-import yahoofinance.YahooFinance;
+package yahoofinance.YahooFinance;
+
 import yahoofinance.Stock;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -30,8 +32,9 @@ public class Sandbox {
             }
         }
 
+        printStocks(list);
         //TODO: print the above list to a cool lookin chart
-        list.toString();
+
     }
 
     public static Stock addStock(String s) throws IOException {
@@ -39,9 +42,15 @@ public class Sandbox {
         return stock;
     }
 
-    public void printStocks(ArrayList<Stock> a) {
-
+    public static void printStocks(ArrayList<Stock> a) {
+        System.out.println("NAME:\tPRICE:\tCHANGE:\tPEG:\tDIVIDEND:");
+        for (int i = 0; i < a.size(); i++) {
+            BigDecimal price = a.get(i).getQuote().getPrice();
+            BigDecimal change = a.get(i).getQuote().getChangeInPercent();
+            BigDecimal peg = a.get(i).getStats().getPeg();
+            BigDecimal dividend = a.get(i).getDividend().getAnnualYieldPercent();
+            String name = a.get(i).getSymbol();
+            System.out.println(name + "\t" + price + "\t" + change + "\t" + peg + "\t" + dividend);
+        }
     }
-
-
 }
