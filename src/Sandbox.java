@@ -30,7 +30,9 @@ public class Sandbox {
                 Thread.currentThread().interrupt();
             }
         }
-
+        listSort(list, "peg");
+        printStocks(list);
+        listSort(list, "Change");
         printStocks(list);
         //TODO: print the above list to a cool lookin chart
 
@@ -49,7 +51,34 @@ public class Sandbox {
             BigDecimal peg = a.get(i).getStats().getPeg();
             BigDecimal dividend = a.get(i).getDividend().getAnnualYieldPercent();
             String name = a.get(i).getSymbol();
+            while (name.length() < 4) {
+                name += " ";
+            }
             System.out.println(name + "\t" + price + "\t" + change + "\t" + peg + "\t" + dividend);
+        }
+    }
+
+    public static void listSort(ArrayList<Stock> a, String sortBy) {
+        if (sortBy.equals("peg")) {
+            for (int i = 0; i < a.size(); i++) {
+                for (int j = i; j > 0; j--) {
+                    if (a.get(j).getStats().getPeg().compareTo(a.get(i).getStats().getPeg()) < 0) {
+                        Stock temp = a.get(i);
+                        a.set(i, a.get(j));
+                        a.set(j, temp);
+                    }
+                }
+            }
+        } else {
+            for (int i = 0; i < a.size(); i++) {
+                for (int j = i; j > 0; j--) {
+                    if (a.get(j).getQuote().getChangeInPercent().compareTo(a.get(i).getQuote().getChangeInPercent()) < 0) {
+                        Stock temp = a.get(i);
+                        a.set(i, a.get(j));
+                        a.set(j, temp);
+                    }
+                }
+            }
         }
     }
 }
