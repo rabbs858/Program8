@@ -30,9 +30,9 @@ public class Sandbox {
                 Thread.currentThread().interrupt();
             }
         }
-        listSort(list, "peg");
+        listSort(list,"peg");
         printStocks(list);
-        listSort(list, "Change");
+        listSort(list,"Change");
         printStocks(list);
         //TODO: print the above list to a cool lookin chart
 
