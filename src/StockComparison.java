@@ -1,22 +1,29 @@
 import yahoofinance.YahooFinance;
 import yahoofinance.Stock;
-
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-
 /**
- * Created by dacty on 12/6/2016.
+ * Program #8
+ *
+ * @author Rob Phillips / Adam Hancock
+ * @description This class uses Stjin Strickx's Yahoo Finance API, obtained from financequotes-api.com. Allows the user
+ * to enter as many stock symbols as they wish and compares all of them to find the largest change. Can sort by other
+ * options like PEG (price/earnings to growth ratio) and dividend, as well.
+ * CS108-2
+ * @date 12/7/2016
+ * @email rphillips@sdsu.edu / adamcollegemail8@gmail.com
  */
-public class Sandbox {
+public class StockComparison {
 
     public static void main(String[] args) throws IOException {
         ArrayList<Stock> list = new ArrayList<>();
         Scanner input = new Scanner(System.in);
 
         System.out.println("Program 8, Robert Phillips, masc0741");
+        System.out.println("Program 8, Adam Hancock, masc0715");
         System.out.println("Please enter up a list of stock symbols separated by spaces:");
 
         String userInput = input.nextLine();
@@ -24,25 +31,34 @@ public class Sandbox {
 
         for (String stock : symbols) {
             try {
-                list.add(addStock(stock));
+                list.add(getStock(stock));
                 Thread.sleep(1000);
             } catch (InterruptedException ex) {
                 Thread.currentThread().interrupt();
             }
         }
-        listSort(list,"peg");
-        printStocks(list);
-        listSort(list,"Change");
-        printStocks(list);
-        //TODO: print the above list to a cool lookin chart
 
+        listSort(list, "Change");
+        printStocks(list);
     }
 
-    public static Stock addStock(String s) throws IOException {
+    /**
+     * Retrieves stock data from the YahooFinance API.
+     *
+     * @param s A stock symbol to look up in the database.
+     * @return A Stock class that includes the data retrieved from the API.
+     * @throws IOException
+     */
+    public static Stock getStock(String s) throws IOException {
         Stock stock = YahooFinance.get(s);
         return stock;
     }
 
+    /**
+     * Prints the user-defined stocks in a tabulated chart. Includes name, price, change, PEG, and dividend.
+     *
+     * @param a An ArrayList of Stock objects.
+     */
     public static void printStocks(ArrayList<Stock> a) {
         System.out.println("NAME:\tPRICE:\tCHANGE:\tPEG:\tDIVIDEND:");
         for (int i = 0; i < a.size(); i++) {
@@ -58,6 +74,12 @@ public class Sandbox {
         }
     }
 
+    /**
+     * An insertion sort. Not the most efficient, but done for academic purposes and learning how the insertion sort works.
+     *
+     * @param a      An ArrayList of Stock objects.
+     * @param sortBy Category you wish to sort by. Default for this project is CHANGE.
+     */
     public static void listSort(ArrayList<Stock> a, String sortBy) {
         if (sortBy.equals("peg")) {
             for (int i = 0; i < a.size(); i++) {
